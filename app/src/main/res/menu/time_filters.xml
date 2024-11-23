@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/filter_by_today"
+        android:title="Filter by Today" />
+    <item
+        android:id="@+id/filter_by_week"
+        android:title="Filter by Week" />
+    <item
+        android:id="@+id/filter_by_past_month"
+        android:title="Filter by Past Month" />
+</menu>

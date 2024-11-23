@@ -1,23 +1,20 @@
+// AsteroidDetailActivity.kt
 package com.ebrahimamin.asteroidradarapp
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
+@Suppress("DEPRECATION")
 class AsteroidDetailActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_asteroid_detail)
-
 
         val asteroidStatusImage: ImageView = findViewById(R.id.asteroid_status_image)
         val asteroidName: TextView = findViewById(R.id.asteroid_name)
@@ -28,17 +25,17 @@ class AsteroidDetailActivity : AppCompatActivity() {
         val distanceFromEarth: TextView = findViewById(R.id.distance_from_earth)
         val auHelpIcon: ImageView = findViewById(R.id.au_help_icon)
 
-        val asteroid = intent.getParcelableExtra<NearEarthObject>("asteroid")
+        val asteroid = intent.getParcelableExtra<AsteroidEntity>("asteroid")
 
         asteroid?.let {
-            asteroidName.text = "Asteroid : " + it.id
-            closeApproachDate.text = it.close_approach_data[0].close_approach_date
-            absoluteMagnitude.text = "${it.absolute_magnitude_h} au"
-            estimatedDiameter.text = "${it.estimated_diameter.kilometers.estimated_diameter_max} km"
-            relativeVelocity.text = "${it.close_approach_data[0].relative_velocity.kilometers_per_second} km/s"
-            distanceFromEarth.text = "${it.close_approach_data[0].miss_distance.astronomical} au"
+            asteroidName.text = "Asteroid : " + it.name
+            closeApproachDate.text = it.closeApproachDate
+            absoluteMagnitude.text = "${it.absoluteMagnitude} au"
+            estimatedDiameter.text = "${it.estimatedDiameter} km"
+            relativeVelocity.text = "${it.relativeVelocity} km/s"
+            distanceFromEarth.text = "${it.distanceFromEarth} au"
 
-            val statusImageRes = if (it.is_potentially_hazardous_asteroid) {
+            val statusImageRes = if (it.isPotentiallyHazardous) {
                 R.drawable.asteroid_hazardous
             } else {
                 R.drawable.asteroid_safe

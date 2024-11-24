@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Asteroid Radar App</string>
+    <string name="app_name">Asteroid Radar</string>
     <string name="asteroid_status_image_description">Asteroid status image</string>
     <string name="image_of_the_day_description">Image of the day</string>
 

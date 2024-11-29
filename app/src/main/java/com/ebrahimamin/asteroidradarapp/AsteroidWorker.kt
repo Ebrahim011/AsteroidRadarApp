@@ -1,8 +1,12 @@
 package com.ebrahimamin.asteroidradarapp
 
 import android.content.Context
+import androidx.work.Constraints
 import androidx.work.CoroutineWorker
+import androidx.work.NetworkType
 import androidx.work.WorkerParameters
+import androidx.work.WorkManager
+import androidx.work.OneTimeWorkRequestBuilder
 import retrofit2.HttpException
 
 class AsteroidWorker(appContext: Context, params: WorkerParameters) : CoroutineWorker(appContext, params) {
@@ -28,6 +32,21 @@ class AsteroidWorker(appContext: Context, params: WorkerParameters) : CoroutineW
             Result.success()
         } catch (e: HttpException) {
             Result.retry()
+        }
+    }
+
+    companion object {
+        fun scheduleWork(context: Context) {
+            val constraints = Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .setRequiresCharging(true)
+                .build()
+
+            val workRequest = OneTimeWorkRequestBuilder<AsteroidWorker>()
+                .setConstraints(constraints)
+                .build()
+
+            WorkManager.getInstance(context).enqueue(workRequest)
         }
     }
 }

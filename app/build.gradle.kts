@@ -40,6 +40,10 @@ android {
     }
 }
 
+tasks.withType<org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask> {
+    dependsOn("kaptKotlin")
+}
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -57,23 +61,21 @@ dependencies {
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.glide)
     implementation(libs.kotlinx.coroutines.android.v164)
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.3.1")
-    implementation("androidx.lifecycle:lifecycle-service:2.3.1")
-    implementation("androidx.work:work-runtime-ktx:2.7.0")
-    implementation("androidx.work:work-runtime:2.7.0")
-    implementation("androidx.work:work-testing:2.7.0")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.github.bumptech.glide:glide:4.12.0")
-    implementation("androidx.room:room-runtime:2.3.0")
-    kapt("androidx.room:room-compiler:2.3.0")
-    implementation("androidx.room:room-ktx:2.3.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.common.java8)
+    implementation(libs.androidx.lifecycle.service)
+    implementation(libs.androidx.work.runtime.ktx.v270)
+    implementation(libs.androidx.work.runtime)
+    implementation(libs.androidx.work.testing)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.glide.v4120)
+    implementation(libs.androidx.room.runtime.v230)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.recyclerview)
-    // For control over item selection of both touch and mouse driven selection
     implementation(libs.androidx.recyclerview.selection)
-    }
+}

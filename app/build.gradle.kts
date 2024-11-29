@@ -40,10 +40,6 @@ android {
     }
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask> {
-    dependsOn("kaptKotlin")
-}
-
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

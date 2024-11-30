@@ -8,6 +8,8 @@ import androidx.work.WorkerParameters
 import androidx.work.WorkManager
 import androidx.work.OneTimeWorkRequestBuilder
 import retrofit2.HttpException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AsteroidWorker(appContext: Context, params: WorkerParameters) : CoroutineWorker(appContext, params) {
     override suspend fun doWork(): Result {
@@ -15,7 +17,7 @@ class AsteroidWorker(appContext: Context, params: WorkerParameters) : CoroutineW
         val asteroidDao = database.asteroidDao
 
         return try {
-            val response = NasaApi.service.getNearEarthObjects("2023-11-01", "2023-11-08")
+            val response = NasaApi.service.getNearEarthObjects(getTodayDate(), getNextWeekDate())
             val asteroids = response.near_earth_objects.values.flatten().map {
                 AsteroidEntity(
                     id = it.id,
@@ -33,6 +35,18 @@ class AsteroidWorker(appContext: Context, params: WorkerParameters) : CoroutineW
         } catch (e: HttpException) {
             Result.retry()
         }
+    }
+
+    private fun getTodayDate(): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return sdf.format(Date())
+    }
+
+    private fun getNextWeekDate(): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR, 7)
+        return sdf.format(calendar.time)
     }
 
     companion object {

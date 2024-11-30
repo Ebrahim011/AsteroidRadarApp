@@ -1,4 +1,3 @@
-// AsteroidDetailActivity.kt
 package com.ebrahimamin.asteroidradarapp
 
 import android.annotation.SuppressLint
@@ -41,6 +40,11 @@ class AsteroidDetailActivity : AppCompatActivity() {
                 R.drawable.asteroid_safe
             }
             asteroidStatusImage.setImageResource(statusImageRes)
+            asteroidStatusImage.contentDescription = if (it.isPotentiallyHazardous) {
+                getString(R.string.image_showing_the_status_of_the_asteroid_whether_it_is_hazardous_or_safe)
+            } else {
+                getString(R.string.image_showing_the_status_of_the_asteroid_whether_it_is_hazardous_or_safe)
+            }
         }
 
         auHelpIcon.setOnClickListener {
@@ -50,5 +54,6 @@ class AsteroidDetailActivity : AppCompatActivity() {
                 .setPositiveButton("OK", null)
                 .show()
         }
+        auHelpIcon.contentDescription = getString(R.string.help_icon_explaining_the_astronomical_unit_au)
     }
 }

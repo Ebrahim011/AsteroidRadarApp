@@ -15,6 +15,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
@@ -43,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.imageOfTheDay.observe(this, Observer { apod ->
             Glide.with(this).load(apod.url).into(imageOfTheDay)
             titleImage.text = apod.title
+            imageOfTheDay.contentDescription = apod.title
         })
 
         viewModel.asteroids.observe(this, Observer { asteroids ->
@@ -50,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.fetchAsteroidsFromApiAndCache()
+        setupWorkManager()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -81,5 +88,18 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun setupWorkManager() {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .setRequiresCharging(true)
+            .build()
+
+        val workRequest = PeriodicWorkRequestBuilder<AsteroidWorker>(1, TimeUnit.DAYS)
+            .setConstraints(constraints)
+            .build()
+
+        WorkManager.getInstance(this).enqueue(workRequest)
     }
 }

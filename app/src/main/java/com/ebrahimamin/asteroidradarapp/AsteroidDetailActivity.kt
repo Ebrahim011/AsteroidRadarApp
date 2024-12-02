@@ -27,31 +27,26 @@ class AsteroidDetailActivity : AppCompatActivity() {
         val asteroid = intent.getParcelableExtra<AsteroidEntity>("asteroid")
 
         asteroid?.let {
-            asteroidName.text = "Asteroid : " + it.name
+            asteroidName.text = it.name
             closeApproachDate.text = it.closeApproachDate
-            absoluteMagnitude.text = "${it.absoluteMagnitude} au"
-            estimatedDiameter.text = "${it.estimatedDiameter} km"
-            relativeVelocity.text = "${it.relativeVelocity} km/s"
-            distanceFromEarth.text = "${it.distanceFromEarth} au"
+            absoluteMagnitude.text = it.absoluteMagnitude.toString()
+            estimatedDiameter.text = it.estimatedDiameter.toString()
+            relativeVelocity.text = it.relativeVelocity
+            distanceFromEarth.text = it.distanceFromEarth
 
-            val statusImageRes = if (it.isPotentiallyHazardous) {
-                R.drawable.asteroid_hazardous
+            if (it.isPotentiallyHazardous) {
+                asteroidStatusImage.setImageResource(R.drawable.asteroid_hazardous)
+                asteroidStatusImage.contentDescription = getString(R.string.hazardous_asteroid)
             } else {
-                R.drawable.asteroid_safe
-            }
-            asteroidStatusImage.setImageResource(statusImageRes)
-            asteroidStatusImage.contentDescription = if (it.isPotentiallyHazardous) {
-                getString(R.string.image_showing_the_status_of_the_asteroid_whether_it_is_hazardous_or_safe)
-            } else {
-                getString(R.string.image_showing_the_status_of_the_asteroid_whether_it_is_hazardous_or_safe)
+                asteroidStatusImage.setImageResource(R.drawable.asteroid_safe)
+                asteroidStatusImage.contentDescription = getString(R.string.non_hazardous_asteroid)
             }
         }
 
         auHelpIcon.setOnClickListener {
             AlertDialog.Builder(this)
-                .setTitle("Astronomical Unit (au)")
-                .setMessage("The astronomical unit (au) is a unit of length, roughly the distance from Earth to the Sun and equal to about 150 million kilometres (93 million miles).")
-                .setPositiveButton("OK", null)
+                .setMessage(getString(R.string.help_icon_explaining_the_astronomical_unit_au))
+                .setPositiveButton(android.R.string.ok, null)
                 .show()
         }
         auHelpIcon.contentDescription = getString(R.string.help_icon_explaining_the_astronomical_unit_au)

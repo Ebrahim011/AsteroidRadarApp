@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/title_image"
-        android:contentDescription="@string/nasa_image_of_the_day_description" />
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/title_image"

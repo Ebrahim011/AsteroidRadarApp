@@ -6,4 +6,6 @@
     <string name="au_help_icon_description">Help Icon for Astronomical Unit</string>
     <string name="help_icon_explaining_the_astronomical_unit_au">Help icon explaining the astronomical unit (au)</string>
     <string name="image_showing_the_status_of_the_asteroid_whether_it_is_hazardous_or_safe">Image showing the status of the asteroid, whether it is hazardous or safe</string>
+    <string name="hazardous_asteroid">Hazardous Asteroid</string>
+    <string name="non_hazardous_asteroid">Non-Hazardous Asteroid</string>
 </resources>

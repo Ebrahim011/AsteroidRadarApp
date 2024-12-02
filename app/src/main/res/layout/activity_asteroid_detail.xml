@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="16dp"
-        android:contentDescription="@string/image_showing_the_status_of_the_asteroid_whether_it_is_hazardous_or_safe" />
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/asteroid_name"
@@ -58,7 +58,7 @@
         android:id="@+id/au_help_icon"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_help_circle"
-        android:contentDescription="@string/help_icon_explaining_the_astronomical_unit_au"
+        tools:ignore="ContentDescription"
         app:layout_constraintBottom_toBottomOf="@+id/absolute_magnitude_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/absolute_magnitude_title" />

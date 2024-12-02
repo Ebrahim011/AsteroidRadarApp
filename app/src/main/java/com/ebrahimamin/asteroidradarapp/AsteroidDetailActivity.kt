@@ -45,7 +45,7 @@ class AsteroidDetailActivity : AppCompatActivity() {
 
         auHelpIcon.setOnClickListener {
             AlertDialog.Builder(this)
-                .setMessage(getString(R.string.help_icon_explaining_the_astronomical_unit_au))
+                .setMessage(getString(R.string.the_astronomical_unit_au_is_a_unit_of_length_roughly_the_distance_from_earth_to_the_sun_and_equal_to_about_150_million_kilometres_93_million_miles))
                 .setPositiveButton(android.R.string.ok, null)
                 .show()
         }

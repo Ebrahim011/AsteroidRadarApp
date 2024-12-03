@@ -21,8 +21,10 @@ class AsteroidAdapter(
         holder.asteroidName.text = asteroid.name
         holder.asteroidDetails.text = "Magnitude: ${asteroid.absoluteMagnitude}, Diameter: ${asteroid.estimatedDiameter} km"
         val statusImageRes = if (asteroid.isPotentiallyHazardous) {
+            holder.asteroidStatusIcon.contentDescription = holder.itemView.context.getString(R.string.hazardous_asteroid)
             R.drawable.ic_status_potentially_hazardous
         } else {
+            holder.asteroidStatusIcon.contentDescription = holder.itemView.context.getString(R.string.non_hazardous_asteroid)
             R.drawable.ic_status_normal
         }
         holder.asteroidStatusIcon.setImageResource(statusImageRes)
